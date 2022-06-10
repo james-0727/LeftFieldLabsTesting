@@ -16,6 +16,9 @@ public class GameSession : MonoBehaviour
     private int highScore = 0;
 
     public static GameSession _instance;
+
+    [SerializeField]
+    private EnemySpawner [] spawners;
     public static GameSession Instance
     {
         get
@@ -49,9 +52,11 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        highScore = PlayerPrefs.GetInt("highScore", 0);
+        // load data
+        LoadData();
         StartSession();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -68,6 +73,15 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    void LoadData()
+    {
+        highScore = PlayerPrefs.GetInt("highScore", 0);
+        timeLeft = PlayerPrefs.GetInt("GameSession", 60);
+        var tmpString = PlayerPrefs.GetString("Pumpkins", "1,2,3");
+        var pumpkinIndexArray = tmpString.Split(',');
+        for (int i = 0; i < pumpkinIndexArray.Length; i++)
+            spawners[i].gameObject.SetActive(true);
+    }
 
     void StartSession()
     {

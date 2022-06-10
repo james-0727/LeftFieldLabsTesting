@@ -8,6 +8,8 @@ public struct Data
 {
     public string Title;
     public string Version;
+    public int GameSession;
+    public int[] Pumpkins;
 }
 public class DataSync : MonoBehaviour
 {
@@ -29,11 +31,20 @@ public class DataSync : MonoBehaviour
         if(request.isNetworkError)
         {
             // error...
-        } else
+        } 
+        else
         {
             Data data = JsonUtility.FromJson<Data>(request.downloadHandler.text);
-            _title.text = data.Title;
-            _version.text = data.Version;
+            if(_title != null)
+                _title.text = data.Title;
+            if(_version != null)
+                _version.text = data.Version;
+
+            PlayerPrefs.SetInt("GameSession", data.GameSession);
+
+            // saves spawn pumpkin index array as string
+            PlayerPrefs.SetString("Pumpkins", string.Join(",", data.Pumpkins));
+
         }
     }
 }
