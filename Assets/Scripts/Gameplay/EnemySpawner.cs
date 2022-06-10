@@ -20,5 +20,12 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         _lastSpawned = Instantiate( _enemyPrefab, _spawnPoint.position, _spawnPoint.rotation );
+        _lastSpawned.OnDeath += SpawnEnemyAfterDeath;
+    }
+
+    void SpawnEnemyAfterDeath()
+    {
+        // spawn enemy after 3 seconds
+        Invoke("SpawnEnemy", 3);
     }
 }

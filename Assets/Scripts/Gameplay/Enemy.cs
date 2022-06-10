@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody _rigidBody = null;
 
     private Vector3 _startPosition = Vector3.zero;
+    [HideInInspector]
+    public EnemySpawner _parentSpawner;
+    public System.Action OnDeath;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,9 @@ public class Enemy : MonoBehaviour
     {
         _rigidBody.useGravity = true;
         Destroy(this);
+        GameSession.Instance.AddScore();
+        Destroy(gameObject, 5);
+        OnDeath();
     }
 
     void OnCollisionEnter( Collision collision )

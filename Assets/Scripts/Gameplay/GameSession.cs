@@ -9,6 +9,21 @@ public class GameSession : MonoBehaviour
 
     public float timeLeft = 0;
 
+    [SerializeField]
+    private HUD _mainUI;
+    private int currentScore = 0;
+
+    public static GameSession _instance;
+    public static GameSession Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.LogError("Game static instance was accessed before it could be initialized!");
+
+            return _instance;
+        }
+    }
     public enum SessionState
     {
         Paused,
@@ -17,6 +32,17 @@ public class GameSession : MonoBehaviour
     }
 
     private SessionState _state = SessionState.Paused;
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -56,5 +82,12 @@ public class GameSession : MonoBehaviour
         {
             OnSessionEnd();
         }
+    }
+
+    public void AddScore()
+    {
+        currentScore++;
+        _mainUI.SetScoreValue(currentScore);
+
     }
 }

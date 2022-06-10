@@ -17,6 +17,7 @@ public class HUD : MonoBehaviour {
     void Start()
     {
         _gameSession.OnSessionEnd += HandleSessionEnded;
+        _scoreValue.text = "0";
     }
 
     string GetFormattedTimeFromSeconds( float seconds )
@@ -35,5 +36,10 @@ public class HUD : MonoBehaviour {
     void Update()
     {
         _timeRemainingValue.text = GetFormattedTimeFromSeconds(_gameSession.timeLeft);
+    }
+
+    public void SetScoreValue(int iScore)
+    {
+        _scoreValue.text = iScore.ToString();
     }
 }
