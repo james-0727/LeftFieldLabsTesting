@@ -1,0 +1,6 @@
+{
+    "Title" : "Pumpkin Shooter",
+    "Version" : "0.9",
+    "GameSession" : "15",
+    "Pumpkins" : [0, 1]
+}

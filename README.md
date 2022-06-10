@@ -6,10 +6,10 @@ Currently using Unity 2020.3.0f1
 
 1. Data I/O:
 	Informations for start menu fields (title and version) are synced with below json file
-	https://drive.google.com/file/d/1ipruV0QwBm11Iiia2GqQsdEhclEBzWsK/view?usp=sharing
+	Assets/StreamingAssets/Data.json
 
 2. Start Menu:
-	- All fields are filled in from data.json file in google drive (Title & version number)
+	- All fields are filled in from data.json file (Title & version number)
 	- The play button loads the game scene
 	- High score is tracked between sessions
 
@@ -24,4 +24,4 @@ Currently using Unity 2020.3.0f1
 		* Load main menu button will load start menu
 
 4. Polish tasks:
-	- Added VFX effects when cannon hitting an enmy and the ground
+	- Added VFX effect when cannon hitting an enmy and the ground
