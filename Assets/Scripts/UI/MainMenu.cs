@@ -26,9 +26,10 @@ public class MainMenu : MonoBehaviour
 
     void GetData()
     {
+        // load data file from path
         StreamReader reader = new StreamReader(path);
         string dataString = reader.ReadToEnd();
-        Debug.Log(dataString);
+
         Data data = JsonUtility.FromJson<Data>(dataString);
         if (_title != null)
             _title.text = data.Title;
