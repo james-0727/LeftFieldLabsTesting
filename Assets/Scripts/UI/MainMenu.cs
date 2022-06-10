@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _highScore.text = PlayerPrefs.HasKey("highScore") ? PlayerPrefs.GetInt("highScore").ToString() : 0.ToString();
+        _highScore.text = PlayerPrefs.GetInt("highScore", 0).ToString();
     }
 
     // Update is called once per frame

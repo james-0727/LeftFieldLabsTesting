@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameSession : MonoBehaviour
     [SerializeField]
     private HUD _mainUI;
     private int currentScore = 0;
+    private int highScore = 0;
 
     public static GameSession _instance;
     public static GameSession Instance
@@ -47,6 +49,7 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("highScore", 0);
         StartSession();
     }
 
@@ -74,6 +77,7 @@ public class GameSession : MonoBehaviour
         {
             OnSessionStart();
         }
+        Time.timeScale = 1;
     }
 
     void EndSession()
@@ -82,12 +86,26 @@ public class GameSession : MonoBehaviour
         {
             OnSessionEnd();
         }
+        Time.timeScale = 0;
     }
 
     public void AddScore()
     {
         currentScore++;
+        if (highScore < currentScore)
+        {
+            highScore = currentScore;
+            PlayerPrefs.SetInt("highScore", highScore);
+        }
         _mainUI.SetScoreValue(currentScore);
 
+    }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
